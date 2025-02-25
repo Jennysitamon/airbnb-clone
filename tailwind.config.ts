@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'airbnb': '#ba0f0f',
+        'airbnb': '#cc7878',
         'airbnb-dark': '#060000 '
       }
       

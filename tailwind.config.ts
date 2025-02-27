@@ -10,7 +10,7 @@ export default {
     extend: {
       colors: {
         'airbnb': '#cc7878',
-        'airbnb-dark': '#060000 '
+        'airbnb-dark': '#a27c82'
       }
       
     },

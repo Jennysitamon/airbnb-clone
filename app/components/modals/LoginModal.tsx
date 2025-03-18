@@ -13,7 +13,7 @@ const LoginModal = () => {
     const loginModal = useLoginModal();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState<string[]>([])
+    const [errors, setErrors] = useState<string[]>([]);
 
     const sumbitLogin = async () => {
         const formData = {
@@ -21,7 +21,7 @@ const LoginModal = () => {
             password: password
         }
 
-        const response = await apiService.post('/api/auth/login/', JSON.stringify(formData))
+        const response = await apiService.postWithoutToken('/api/auth/login/', JSON.stringify(formData))
 
         if (response.access) {
                     handleLogin(response.user.pk, response.access, response.refresh)

@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 import MenuLink from "./MenuLink";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
 import LogoutButton from "../LogoutButton";
+import { Router } from "next/router";
 
 interface UserNavProps {
     userId?: string | null;
@@ -13,6 +15,7 @@ interface UserNavProps {
 const UserNav: React.FC<UserNavProps> = ({
     userId
 }) => {
+    const router = useRouter();
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
     const [isOpen, setIsOpen] = useState(false)
@@ -21,7 +24,7 @@ const UserNav: React.FC<UserNavProps> = ({
 
     return (
         <div className="p-2 relative inline-block border rounded-full">
-            <button 
+            <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
@@ -35,15 +38,23 @@ const UserNav: React.FC<UserNavProps> = ({
 
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
-                    {
-                        userId ? (
+                    {userId ? (
+                        <>
+                            <MenuLink
+                                label='My properties'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/myproperties');
+                                }}
+                            />
                             <LogoutButton />
-                        ) : (
-                            <>
+                        </>
+                    ) : (
+                        <>
                             <MenuLink
                                 label="Log in"
                                 onClick={() => {
-                                setIsOpen(false);
+                                    setIsOpen(false);
                                     loginModal.open();
                                 }} />
                             <MenuLink
@@ -53,12 +64,12 @@ const UserNav: React.FC<UserNavProps> = ({
                                     signupModal.open();
                                 }
                                 } />
-                            </>
-                        )
+                        </>
+                    )
                     }
-                    
 
-                    
+
+
                 </div>
             )}
         </div>

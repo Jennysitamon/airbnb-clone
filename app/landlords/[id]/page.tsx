@@ -16,13 +16,15 @@ const LandlordDetailPage = async ({ params }: { params: { id: string } }) => {
                 <aside className="col-span-1 mb-4">
                     <div className="p-4 rounded-lg border border-pink-300 shadow-md text-center">
                         <Image
-                            src={landlord.avatar_url}
+                            src={landlord.avatar_url && landlord.avatar_url.trim() !== "" 
+                                    ? landlord.avatar_url 
+                                    : '/profile_pic_1.png'}
                             width={200}
                             height={200}
                             alt="Landlord name"
                             className="rounded-full mx-auto"
                         />
-                        <h1 className="mt-4 text-2xl font-semibold">{landlord.name}</h1>
+                        <h1 className="mt-4 text-2xl font-semibold">{landlord.name ?? 'Usuario sin nombre'}</h1>
 
                         {userId != params.id && (
                             <ContactButton />

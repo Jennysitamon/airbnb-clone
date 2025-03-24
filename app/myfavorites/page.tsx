@@ -7,7 +7,7 @@ const MyFavoritesPage = async () => {
     if (!userId) {
         return (
             <main className="max-w-[1500px] max-auto px-6 pb-12">
-                <p>Tu necesitas autenticación...</p>
+                <p>Tu necesitas autenticarte...</p>
             </main>
         )
     }

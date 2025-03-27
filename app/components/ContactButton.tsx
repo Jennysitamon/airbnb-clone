@@ -25,6 +25,7 @@ const ContactButton: React.FC<ContactButtonProps> = ({
             }
         } else {
             loginModal.open();
+            
         }
     }
 

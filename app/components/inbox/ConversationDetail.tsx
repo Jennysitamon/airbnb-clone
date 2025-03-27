@@ -1,11 +1,10 @@
 'use client';
 
 import CustomButton from "../forms/CustomButton";
-import { ConversationType } from "@/app/inbox/page";
+import { ConversationType, UserType } from "@/app/inbox/page";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useEffect, useState, useRef } from "react";
 import { MessageType } from "@/app/inbox/[id]/page";
-import { UserType } from "@/app/inbox/page";
 
 interface ConversationDetailProps {
     token: string;
@@ -29,7 +28,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(`${process.env.NEXT_PUBLIC_WS_HOST}/ws/${conversation.id}/?token=${token}`, {
         share: false,
         shouldReconnect: () => true,
-      },
+    },
     )
 
     useEffect(() => {
@@ -54,7 +53,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     }, [lastJsonMessage]);
 
     const sendMessage = async () => {
-        console.log('sendMessage'),
+
+        console.log("sendmessage");
 
         sendJsonMessage({
             event: 'chat_message',
@@ -62,7 +62,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                 body: newMessage,
                 name: myUser?.name,
                 sent_to_id: otherUser?.id,
-                conversation_id: conversation.id
+                conversation_id: conversation.id,
             }
         });
 
@@ -70,7 +70,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
         setTimeout(() => {
             scrollToBottom()
-        }, 50);
+        }, 50)
     }
 
     const scrollToBottom = () => {
@@ -81,7 +81,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
     return (
         <>
-            <div 
+            <div
                 ref={messagesDiv}
                 className="max-h-[400px] overflow-auto flex flex-col space-y-4"
             >
@@ -115,7 +115,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                     onChange={(e) => setNewMessage(e.target.value)}
                 />
 
-                <CustomButton 
+                <CustomButton
                     label='Send'
                     onClick={sendMessage}
                     className="w-[100px]"
